@@ -17,11 +17,12 @@ def read_sensors(sensors: list) -> list:
     return readings
 
 
-def pso(readings: list):
+def pso(readings: list) -> list:
     particles = []
     pbest = []
     gbest = [-1000, -1000]
     velocity = []
+    prev_velocity = []
 
     poly = []
     # Construct polygon for final point range
@@ -29,12 +30,40 @@ def pso(readings: list):
         if read[1]:
             poly.append([read[2][0], read[2][1]])
 
-    print(poly)
-
+    # initialize particles
     for i in range(5):
-        location = r.random()
-        particles.append([0, 0])
-        pbest.append(particles[i])
+        print()
+        # point = Point( random coords from robot position )
+        # while point not in polygon
+            # generate new point
+        # particles.append(point)
+        # pbest.append(particles[i])
+
+        # if fitness(particles[i]) < fitness(gbest):
+            # gbest = particles[i]
+
+        # velocity.append(random coordinates for vector (inside polygon still))
+
+    c = 1
+    s = 1
+    w = 1
+
+    # update particles
+    for _ in range(len(readings)):
+        for p in range(len(particles)):
+            for k in p:
+                print()
+                # velocity[p][k] = w * velocity[p][k] + c * rand * (pbest[p][k] - particles[p][k]) + s * rand *
+                #                   (gbest[k] * particles[p][k])
+
+            # particles[p] = particles[p] + velocity[p]
+
+            # if fitness(particles[p]) < fitness(pbest[p]):
+                # pbest[p] = particles[p]
+                # if fitness(particles[p]) < fitness(gbest):
+                    # gbest = particles[p]
+
+    return gbest
 
 
 if __name__ == '__main__':
@@ -103,4 +132,4 @@ if __name__ == '__main__':
     for x in range(1000):
         # Update sensors
         readings = read_sensors(sensors)
-        #pso(readings)
+        pso(readings)
